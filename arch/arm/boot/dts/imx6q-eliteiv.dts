@@ -10,5 +10,5 @@
 
 / {
 	model = "C.E. Electronics, Inc. i.MX6 Quad Elite IV";
-	compatible = "fsl,imx6q-eliteiv", "fsl,imx6q";
+	compatible = "ce,imx6q-eliteiv", "fsl,imx6q";
 };

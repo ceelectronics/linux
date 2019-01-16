@@ -66,54 +66,6 @@
 		*/
 	};
 
-/*
-	gpio-keys {
-		compatible = "gpio-keys";
-		pinctrl-names = "default";
-		pinctrl-0 = <&pinctrl_gpio_keys>;
-
-		power {
-			label = "Power Button";
-			gpios = <&gpio3 29 GPIO_ACTIVE_LOW>;
-			wakeup-source;
-			linux,code = <KEY_POWER>;
-		};
-
-		volume-up {
-			label = "Volume Up";
-			gpios = <&gpio1 4 GPIO_ACTIVE_LOW>;
-			wakeup-source;
-			linux,code = <KEY_VOLUMEUP>;
-		};
-
-		volume-down {
-			label = "Volume Down";
-			gpios = <&gpio1 5 GPIO_ACTIVE_LOW>;
-			wakeup-source;
-			linux,code = <KEY_VOLUMEDOWN>;
-		};
-	};
-*/
-
-	/*
-	sound {
-		compatible = "fsl,imx6q-sabresd-wm8962",
-			   "fsl,imx-audio-wm8962";
-		model = "wm8962-audio";
-		ssi-controller = <&ssi2>;
-		audio-codec = <&codec>;
-		audio-routing =
-			"Headphone Jack", "HPOUTL",
-			"Headphone Jack", "HPOUTR",
-			"Ext Spk", "SPKOUTL",
-			"Ext Spk", "SPKOUTR",
-			"AMIC", "MICBIAS",
-			"IN3R", "AMIC";
-		mux-int-port = <2>;
-		mux-ext-port = <3>;
-	};
-	*/
-
 	backlight_lvds: backlight-lvds {
 		compatible = "pwm-backlight";
 		pwms = <&pwm1 0 5000000>;
@@ -121,32 +73,6 @@
 		default-brightness-level = <7>;
 		status = "okay";
 	};
-
-	/*
-	leds {
-		compatible = "gpio-leds";
-		pinctrl-names = "default";
-		pinctrl-0 = <&pinctrl_gpio_leds>;
-
-		red {
-			gpios = <&gpio1 2 0>;
-			default-state = "on";
-		};
-	};
-	*/
-
-	/*
-	panel {
-		compatible = "hannstar,hsd100pxn1";
-		backlight = <&backlight_lvds>;
-
-		port {
-			panel_in: endpoint {
-				remote-endpoint = <&lvds0_out>;
-			};
-		};
-	};
-	*/
 };
 
 &ipu1_csi0_from_ipu1_csi0_mux {
@@ -156,66 +82,12 @@
 	vsync-active = <1>;
 };
 
-/*
-&ipu1_csi0_mux_from_parallel_sensor {
-	remote-endpoint = <&ov5642_to_ipu1_csi0_mux>;
-};
-*/
-
-/*
-&ipu1_csi0 {
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_ipu1_csi0>;
-};
-*/
-
-/*
-&mipi_csi {
-	status = "okay";
-
-	port@0 {
-		reg = <0>;
-
-		mipi_csi2_in: endpoint {
-			remote-endpoint = <&ov5640_to_mipi_csi2>;
-			clock-lanes = <0>;
-			data-lanes = <1 2>;
-		};
-	};
-};
-*/
-
-/*
-&audmux {
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_audmux>;
-	status = "okay";
-};
-*/
-
 &clks {
 	assigned-clocks = <&clks IMX6QDL_CLK_LDB_DI0_SEL>,
 			  <&clks IMX6QDL_CLK_LDB_DI1_SEL>;
 	assigned-clock-parents = <&clks IMX6QDL_CLK_PLL3_USB_OTG>,
 				 <&clks IMX6QDL_CLK_PLL3_USB_OTG>;
 };
-
-/*
-&ecspi1 {
-	cs-gpios = <&gpio4 9 0>;
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_ecspi1>;
-	status = "okay";
-
-	flash: m25p80@0 {
-		#address-cells = <1>;
-		#size-cells = <1>;
-		compatible = "st,m25p32", "jedec,spi-nor";
-		spi-max-frequency = <20000000>;
-		reg = <0>;
-	};
-};
-*/
 
 &fec {
 	pinctrl-names = "default";
@@ -232,88 +104,11 @@
 	status = "okay";
 };
 
-//&i2c1 {
-//	clock-frequency = <100000>;
-//	pinctrl-names = "default";
-//	pinctrl-0 = <&pinctrl_i2c1>;
-//	status = "okay";
-
-//	codec: wm8962@1a {
-//		compatible = "wlf,wm8962";
-//		reg = <0x1a>;
-//		clocks = <&clks IMX6QDL_CLK_CKO>;
-//		DCVDD-supply = <&reg_audio>;
-//		DBVDD-supply = <&reg_audio>;
-//		AVDD-supply = <&reg_audio>;
-//		CPVDD-supply = <&reg_audio>;
-//		MICVDD-supply = <&reg_audio>;
-//		PLLVDD-supply = <&reg_audio>;
-//		SPKVDD1-supply = <&reg_audio>;
-//		SPKVDD2-supply = <&reg_audio>;
-//		gpio-cfg = <
-//			0x0000 /* 0:Default */
-//			0x0000 /* 1:Default */
-//			0x0013 /* 2:FN_DMICCLK */
-//			0x0000 /* 3:Default */
-//			0x8014 /* 4:FN_DMICCDAT */
-//			0x0000 /* 5:Default */
-//		>;
-//	};
-
-//	ov5642: camera@3c {
-//		compatible = "ovti,ov5642";
-//		pinctrl-names = "default";
-//		pinctrl-0 = <&pinctrl_ov5642>;
-//		clocks = <&clks IMX6QDL_CLK_CKO>;
-//		clock-names = "xclk";
-//		reg = <0x3c>;
-//		DOVDD-supply = <&vgen4_reg>; /* 1.8v */
-//		AVDD-supply = <&vgen3_reg>;  /* 2.8v, rev C board is VGEN3
-//						rev B board is VGEN5 */
-//		DVDD-supply = <&vgen2_reg>;  /* 1.5v*/
-//		powerdown-gpios = <&gpio1 16 GPIO_ACTIVE_HIGH>;
-//		reset-gpios = <&gpio1 17 GPIO_ACTIVE_LOW>;
-//		status = "disabled";
-
-//		port {
-//			ov5642_to_ipu1_csi0_mux: endpoint {
-//				remote-endpoint = <&ipu1_csi0_mux_from_parallel_sensor>;
-//				bus-width = <8>;
-//				hsync-active = <1>;
-//				vsync-active = <1>;
-//			};
-//		};
-//	};
-//};
-
 &i2c2 {
 	clock-frequency = <100000>;
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_i2c2>;
 	status = "okay";
-
-//	ov5640: camera@3c {
-//		compatible = "ovti,ov5640";
-//		pinctrl-names = "default";
-//		pinctrl-0 = <&pinctrl_ov5640>;
-//		reg = <0x3c>;
-//		clocks = <&clks IMX6QDL_CLK_CKO>;
-//		clock-names = "xclk";
-//		DOVDD-supply = <&vgen4_reg>; /* 1.8v */
-//		AVDD-supply = <&vgen3_reg>;  /* 2.8v, rev C board is VGEN3
-//						rev B board is VGEN5 */
-//		DVDD-supply = <&vgen2_reg>;  /* 1.5v*/
-//		powerdown-gpios = <&gpio1 19 GPIO_ACTIVE_HIGH>;
-//		reset-gpios = <&gpio1 20 GPIO_ACTIVE_LOW>;
-
-//		port {
-//			ov5640_to_mipi_csi2: endpoint {
-//				remote-endpoint = <&mipi_csi2_in>;
-//				clock-lanes = <0>;
-//				data-lanes = <1 2>;
-//			};
-//		};
-//	};
 };
 
 
@@ -647,44 +442,6 @@
 	};
 };
 
-/*
-&ldb {
-	status = "okay";
-
-	lvds-channel@1 {
-		fsl,data-mapping = "spwg";
-		fsl,data-width = <18>;
-		status = "okay";
-
-		port@4 {
-			reg = <4>;
-
-			lvds0_out: endpoint {
-				remote-endpoint = <&panel_in>;
-			};
-		};
-	};
-};
-*/
-
-/*
-&pcie {
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_pcie>;
-	reset-gpio = <&gpio7 12 GPIO_ACTIVE_LOW>;
-	vpcie-supply = <&reg_pcie>;
-	status = "okay";
-};
-*/
-
-/*
-&pwm1 {
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_pwm1>;
-	status = "okay";
-};
-*/
-
 &reg_arm {
        vin-supply = <&sw1a_reg>;
 };
@@ -716,27 +473,6 @@
 	status = "okay";
 };
 
-/*
-&usbotg {
-	vbus-supply = <&reg_usb_otg_vbus>;
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_usbotg>;
-	disable-over-current;
-	status = "okay";
-};
-*/
-
-/*
-&usdhc2 {
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_usdhc2>;
-	bus-width = <8>;
-	cd-gpios = <&gpio2 2 GPIO_ACTIVE_LOW>;
-	wp-gpios = <&gpio2 3 GPIO_ACTIVE_HIGH>;
-	status = "okay";
-};
-*/
-
 &usdhc3 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_usdhc3>;
@@ -746,17 +482,6 @@
 	wp-gpios = <&gpio2 1 GPIO_ACTIVE_LOW>;
 	status = "okay";
 };
-
-/*
-&usdhc4 {
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_usdhc4>;
-	bus-width = <8>;
-	non-removable;
-	no-1-8-v;
-	status = "okay";
-};
-*/
 
 &wdog1 {
 	status = "disabled";
