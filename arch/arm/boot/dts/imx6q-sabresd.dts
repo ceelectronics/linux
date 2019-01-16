@@ -9,6 +9,15 @@
 #include "imx6qdl-sabresd.dtsi"
 
 / {
-	model = "C.E. Electronics, Inc. i.MX6 Quad Elite IV Board";
+	model = "Freescale i.MX6 Quad SABRE Smart Device Board";
 	compatible = "fsl,imx6q-sabresd", "fsl,imx6q";
+};
+
+&sata {
+	status = "okay";
+};
+
+&ipu1_csi1_from_mipi_vc1 {
+	clock-lanes = <0>;
+	data-lanes = <1 2>;
 };
