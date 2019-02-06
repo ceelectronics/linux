@@ -71,14 +71,12 @@
 		};
 		*/
 	};
+};
 
-	backlight_lvds: backlight-lvds {
-		compatible = "pwm-backlight";
-		pwms = <&pwm1 0 5000000>;
-		brightness-levels = <0 4 8 16 32 64 128 255>;
-		default-brightness-level = <7>;
-		status = "okay";
-	};
+&can1 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_flexcan1>;
+	status = "okay";
 };
 
 &ipu1_csi0_from_ipu1_csi0_mux {
@@ -288,6 +286,13 @@
 				MX6QDL_PAD_RGMII_RD3__RGMII_RD3		0x1b030
 				MX6QDL_PAD_RGMII_RX_CTL__RGMII_RX_CTL	0x1b030
 				MX6QDL_PAD_GPIO_16__ENET_REF_CLK	0x4001b0a8
+			>;
+		};
+
+		pinctrl_flexcan1: flexcan1grp {
+			fsl,pins = <
+				MX6QDL_PAD_KEY_COL2__FLEXCAN1_TX 0x1b0b0
+				MX6QDL_PAD_KEY_ROW2__FLEXCAN1_RX 0x1b0b0
 			>;
 		};
 
