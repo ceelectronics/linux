@@ -67,29 +67,29 @@
 
 /* Elite IV SPI1 FPGA Programming */
 &ecspi1 {
-	cs-gpios = <&gpio5 17 GPIO_ACTIVE_HIGH>;
+	cs-gpios = <&gpio5 17 GPIO_ACTIVE_LOW>;
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_ecspi1>;
 	status = "okay";
 
 	spidev@0 {
-		compatible = "spidev";
+		compatible = "rohm,dh2228fv";
 		reg = <0>;
-		spi-max-frequency = <60000000>;
+		spi-max-frequency = <30000000>;
 	};
 };
 
 /* Elite IV SPI2 FPGA Control and Configuration */
 &ecspi2 {
-	cs-gpios = <&gpio5 12 GPIO_ACTIVE_HIGH>;
+	cs-gpios = <&gpio5 12 GPIO_ACTIVE_LOW>;
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_ecspi2>;
 	status = "okay";
 
 	spidev@0 {
-		compatible = "spidev";
+		compatible = "rohm,dh2228fv";
 		reg = <0>;
-		spi-max-frequency = <60000000>;
+		spi-max-frequency = <15000000>;
 	};
 };
 
@@ -244,6 +244,7 @@
 			MX6QDL_PAD_GPIO_19__GPIO4_IO05 0x1b0b0
 			MX6QDL_PAD_NANDF_D1__GPIO2_IO01 0x1b0b0
 			MX6QDL_PAD_EIM_D22__GPIO3_IO22  0x1b0b0
+			MX6QDL_PAD_CSI0_PIXCLK__GPIO5_IO18  0x1b0b0
 		>;
 	};
 
